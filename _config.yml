@@ -1,4 +1,4 @@
-baseurl: "/flake/"
+baseurl: "/flake"
 url: ""
 
 collections:
@@ -19,4 +19,6 @@ paginate: 1
 paginate_path: "/posts/:num"
 
 plugins:
+  - jekyll-feed
+  - jekyll-paginate
   - jekyll-sitemap
