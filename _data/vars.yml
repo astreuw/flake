@@ -3,6 +3,7 @@ site:
   theme: dark # light or dark
   title: Flakes's Kitchen
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non massa lacus. Duis non sem ante. Nulla facilisi. Maecenas viverra erat nisi, eget tristique metus porttitor vitae.
+  banner: /assets/img/default.png
 
 posts:
   too_early_message: "You arrived too early for posts... Come back later!"
