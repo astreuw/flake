@@ -1,0 +1,79 @@
+site:
+  lang: en
+  theme: dark # light or dark
+  title: Flakes's Kitchen
+  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non massa lacus. Duis non sem ante. Nulla facilisi. Maecenas viverra erat nisi, eget tristique metus porttitor vitae.
+  banner: /assets/img/site_banner.png
+
+posts:
+  too_early_message: "You arrived too early for posts... Come back later!"
+
+greetings:
+  enabled: true
+  title: Hello, friend!
+  message: Duis sit amet quam enim. Proin tincidunt et lectus sit amet convallis. Curabitur ligula tortor, auctor eget nisl at, sollicitudin ultricies lacus. Phasellus non nisl pellentesque, tincidunt enim ullamcorper, ornare justo. Donec at tortor in urna posuere tincidunt vitae at dolor. Sed euismod orci non interdum porta.
+
+author:
+  avatar_url: https://avatars.githubusercontent.com/u/193378109
+  name: John Doe
+  description: Suspendisse mauris justo, venenatis quis est vel, malesuada interdum odio. Phasellus vulputate, lacus vel feugiat commodo, metus velit cursus nulla, a vulputate nulla nisl non nisl. Pellentesque eu lacus ipsum. Pellentesque quam urna, fringilla imperdiet nisi eu, pharetra tempor lorem. Pellentesque condimentum, sapien a facilisis convallis, enim sapien ullamcorper massa, at porttitor nulla diam at elit. Aenean vitae erat ipsum.
+
+  contact:
+    show_icons: true
+    show_labels: false
+
+    email: example (at) mail (dot) com
+    discord: "@johndoe"
+    gpg_fingerprint: 0000 0000 0000 0000 0000  0000 0000 0000 0000 0000
+
+    links:
+      - label: LinkedIn
+        url: https://linkedin.com/in/
+        icon: fa-brands fa-linkedin
+
+      - label: YouTube
+        url: https://youtube.com/
+        icon: fa-brands fa-youtube
+
+      - label: YouTube
+        url: https://youtube.com/
+        icon: fa-brands fa-youtube
+
+      - label: GitHub
+        url: https://github.com/
+        icon: fa-brands fa-github
+
+      - label: Twitter/X
+        url: https://x.com/
+        icon: fa-brands fa-x-twitter
+
+  featured_projects:
+    - title: My Project 1
+      url: https://www.youtube.com/
+      icon: fa-brands fa-youtube
+      image: /assets/img/crying-cat.gif
+      description: Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+    - title: My Project 2
+      url: https://www.github.com/
+      icon: fa-brands fa-github
+      image: /assets/img/eepy-cat.gif
+      description: Nam lacus ex, mattis sed lacinia sed, rutrum at ipsum.
+
+navbar:
+  show_labels: true
+  show_icons: true
+
+  links:
+    - label: Home
+      url: /
+      icon: fa-solid fa-house
+      open_in_page: _self # _self, _blank, ...
+
+    - label: Projects
+      url: /projects
+      icon: fa-solid fa-folder
+
+    - label: About
+      url: /about
+      icon: fa-solid fa-user
