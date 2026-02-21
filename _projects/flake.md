@@ -13,7 +13,7 @@ Flake is a minimalist blog theme for Jekyll created by <a href="https://astreuw.
 - Blog features: write, customize and organize your ideas and publications;
 - Projects: share your projects and create a custom page to show the world what you've done;
 - Custom elements: customize your publications with custom elements from Flake;
-- Theme: choose between light and dark theme;
+- Themes: choose between light and dark theme;
 - Syntax highlighting: add life to your embedded code;
 
 # Screenshots
@@ -21,12 +21,6 @@ Here are a couple of Flake's screenshots:
 ![](/assets/img/post/welcome-to-flake/1.png)
 ![](/assets/img/post/welcome-to-flake/2.png)
 ![](/assets/img/post/welcome-to-flake/3.png)
-
-# TODO
-Flake is currently under development and improvement; feel free to contribute if you wish.
-
-- [ ] Support SEO tag: title, description, banner, etc;
-- [ ] Improve mobile support: fix mobile navbar, improve visualization;
 
 # License
 © 2025 Ricardo Costa. Distributed under the MIT License.
