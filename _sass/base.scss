@@ -214,11 +214,21 @@ img:not(.image-raw) {
     flex-direction: column;
     justify-content: center;
     gap: 0rem;
+    border-left: var(--default-border);
+    padding-left: 1rem;
+  }
+
+  .post-item:hover .post-title::after {
+    content: " #";
   }
 
   .post-title {
     font-size: 1.1rem;
     font-weight: bold;
+  }
+
+  .post-description {
+    color: var(--text-color);
   }
 }
 
