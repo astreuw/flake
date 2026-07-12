@@ -1,0 +1,97 @@
+title: Portfolio
+bio: "Full Stack Developer<br>Computer Engineering Student"
+resume: Passionate about creating and everything about computers.
+
+stack_title: What I make things with
+stack:
+  - category: Languages
+    description: I've been working with Python and TypeScript for a long time.
+    items:
+      - name: Python
+        icon: fa-brands fa-python
+
+      - name: Ruby
+        icon: fa-solid fa-gem
+
+      - name: TypeScript
+        icon: fa-brands fa-typescript
+
+      - name: C++ & C
+        icon: fa-solid fa-code
+
+      - name: Bash
+        icon: fa-solid fa-code
+
+  - category: Frameworks
+    description: Ecosystems and libraries I use to build robust applications.
+    items:
+      - name: Django
+        icon: fa-solid fa-snowflake
+
+      - name: Flask
+        icon: fa-solid fa-flask
+
+      - name: Node.js
+        icon: fa-brands fa-node
+
+      - name: React.js
+        icon: fa-solid fa-atom
+
+      - name: Next.js
+        icon: fa-brands fa-react
+
+  - category: Tools
+    description: Utilities and environments that optimize my development workflow.
+    items:
+      - name: Git
+        icon: fa-brands fa-git
+
+      - name: Docker
+        icon: fa-brands fa-docker
+
+      - name: VirtualBox
+        icon: fa-solid fa-box
+
+      - name: CMake
+        icon: fa-solid fa-shapes
+
+      - name: GNU/Linux
+        icon: fa-solid fa-terminal
+
+  - category: Services
+    description: Platforms I trust for cloud database, hosting, and collaboration.
+    items:
+      - name: GitHub
+        icon: fa-brands fa-github
+
+      - name: Supabase
+        icon: fa-solid fa-database
+
+      - name: Vercel
+        icon: fa-solid fa-caret-up
+
+projects:
+  - title: Flake
+    thumbnail: /assets/img/flake-portfolio-thumbnail.png
+    description: A minimalist blog theme for Jekyll
+    link: https://github.com/astreuw/flake
+    stack:
+      - name: Jekyll
+        icon: fa-solid fa-gem
+
+      - name: Tailwind CSS
+        icon: fa-solid fa-water
+
+      - name: Javascript
+        icon: fa-brands fa-js
+
+  - title: In a Few Bits
+    thumbnail: /assets/img/inafewbits-portfolio-thumbnail.png
+    description: Science and Computing in a Few Bits
+    link: https://youtube.com/@empoucosbits
+    stack:
+      - name: DaVinci Resolve
+        icon: fa-solid fa-video
+
+      - name: Manim
+        icon: fa-brands fa-python

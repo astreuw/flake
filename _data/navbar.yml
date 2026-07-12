@@ -1,0 +1,21 @@
+show_labels: true
+show_icons: true
+
+links:
+  - label: Home
+    url: /
+    icon: fa-solid fa-house
+    open_in_page: _self # _self, _blank, ...
+
+  - label: Portfolio
+    url: /portfolio
+    icon: fa-solid fa-briefcase
+    disabled: false
+
+  - label: Projects
+    url: /projects
+    icon: fa-solid fa-code-branch
+
+  - label: About
+    url: /about
+    icon: fa-solid fa-user

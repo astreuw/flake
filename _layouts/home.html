@@ -1,0 +1,74 @@
+---
+layout: default
+---
+
+{%- assign vars = site.data.vars -%}
+
+{% if vars.greetings %}
+<header class="flex flex-col" aria-labelledby="home-intro-title">
+  <img src="{{ vars.author.avatar_url }}" alt="{{ vars.author.name | default: 'Author' }} avatar" class="w-32 h-32 rounded-lg border border-stone-500" loading="lazy" decoding="async">
+
+  <h1 id="home-intro-title" class="text-3xl font-bold text-stone-800 mt-4">{{ vars.greetings.title }}</h1>
+  <p class="text-stone-600 mt-2">{{ vars.greetings.message }}</p>
+</header>
+{% endif %}
+
+<section class="flex flex-col gap-2" aria-labelledby="recent-publications-heading">
+  {%- assign posts_count = site.posts | size -%}
+
+  <h2 id="recent-publications-heading" class="text-xl my-4">Recent Publications</h2>
+
+  {% if posts_count == 0 %}
+  <div class="flex gap-2">
+    <figure class="shrink-0">
+      <img src="{{ '/assets/img/eepy-cat.gif' | relative_url }}" alt="Illustration for no posts published yet" class="w-32 h-32 border border-slate-500 rounded-lg" loading="lazy" decoding="async">
+    </figure>
+    <div>
+      <p>
+        {{ vars.posts.too_early_message }}<br>
+        &mdash; {{ vars.author.name }}
+      </p>
+    </div>
+  </div>
+  {% else %}
+  <ul class="flex flex-col gap-4">
+    {% for post in site.posts limit: 3 %}
+    <li class="flex flex-col rounded-lg group">
+      <article class="flex flex-col">
+        <a href="{{ post.url | relative_url }}" class="flex flex-col">
+          <span class="text-xl font-bold">{{ post.title }}</span>
+          <time datetime="{{ post.date | date_to_xmlschema }}" class="text-stone-500">{{ post.date | date: "%d/%m/%Y" }}</time>
+          <p class="text-stone-600">{{ post.description }}</p>
+        </a>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{{ '/posts' | relative_url }}" class="group mt-4 inline-flex items-center gap-2">
+    All posts <i class="fa-solid fa-long-arrow-right transition-transform duration-300 group-hover:translate-x-2"></i>
+  </a>
+  {% endif %}
+</section>
+
+{% if vars.author.featured_projects %}
+<section class="flex flex-col gap-2" aria-labelledby="featured-projects-heading">
+  <h2 id="featured-projects-heading" class="text-xl my-4">Featured Projects</h2>
+
+  <ul class="flex flex-wrap md:flex-nowrap gap-2">
+    {% for project in vars.author.featured_projects %}
+    <li class="w-full flex flex-col border border-stone-400 p-4 hover:bg-stone-300/90 transition-all duration-300 rounded-lg">
+      <article class="flex flex-col">
+        <a href="{{ project.url | relative_url }}" class="block">
+          <img src="{{ project.image }}" alt="{{ project.title }} thumbnail" class="w-16 h-16 min-w-16 min-h-16 object-cover flex-shrink-0 rounded-full border border-stone-500" loading="lazy" decoding="async">
+          <h3 class="text-xl font-bold mt-2">{{ project.title }} {% if project.icon %} <i class="{{ project.icon }}"></i>{% endif %}</h3>
+          <p class="mt-1">{{ project.description }}</p>
+        </a>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endif %}
+
+{{ content }}

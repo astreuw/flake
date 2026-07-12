@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+{%- assign vars = site.data.vars -%}
+
+<article class="flex flex-col gap-4" aria-labelledby="about-title">
+  <header class="flex flex-col gap-2">
+    <img src="{{ vars.author.avatar_url }}" alt="{{ vars.author.name | default: 'Author' }} avatar" class="w-32 h-32 rounded-lg border border-stone-500" loading="lazy" decoding="async">
+    <h1 id="about-title" class="text-3xl font-bold pt-4">Who am I?</h1>
+    <p>{{ vars.author.description }}</p>
+    <p>If you want to know more about what I'm working on, visit my <a href="{{ '/projects' | relative_url }}" class="underline underline-offset-3 transition-all">projects</a> page.</p>
+  </header>
+
+  <section class="flex flex-col gap-2" aria-labelledby="contact-heading">
+    <h2 id="contact-heading" class="text-3xl font-bold pt-4">Contact</h2>
+    <address class="not-italic flex flex-col gap-2">
+      {% if vars.author.contact.email %}
+      <p><span class="font-semibold">E-mail:</span> <a href="mailto:{{ vars.author.contact.email }}" class="underline underline-offset-3 transition-all">{{ vars.author.contact.email }}</a></p>
+      {% endif %}
+
+      {% if vars.author.contact.discord %}
+      <p><span class="font-semibold">Discord:</span> {{ vars.author.contact.discord }}</p>
+      {% endif %}
+
+      {% if vars.author.contact.gpg_fingerprint %}
+      <p><span class="font-semibold">GPG Fingerprint:</span> <code class="font-mono bg-stone-300/60 px-1.5 py-0.5 rounded text-sm break-all">{{ vars.author.contact.gpg_fingerprint }}</code></p>
+      {% endif %}
+    </address>
+
+    <h2 class="text-3xl font-bold pt-4">Reach me</h2>
+    <ul class="flex gap-2" aria-label="Social links">
+      {% for link in vars.author.contact.links %}
+      <li class="flex">
+        <a href="{{ link.url }}" class="inline-flex items-center gap-1 border border-slate-500 p-1 hover:bg-stone-300/90 transition-all duration-300 rounded-sm">
+          {% if vars.author.contact.show_icons %}<i class="{{ link.icon }}"></i>{% endif %}
+          {% if vars.author.contact.show_labels %}<span>{{ link.label }}</span>{% endif %}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+</article>
+
+{{ content }}

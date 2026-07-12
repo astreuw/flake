@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+<article class="flex flex-col gap-2" aria-labelledby="project-title" aria-describedby="project-description">
+  <header class="flex flex-col sm:flex-row gap-6 items-center sm:items-start text-center sm:text-left">
+    <img src="{{ page.thumbnail }}" alt="{{ page.title }} thumbnail" class="w-32 h-32 rounded-lg border border-stone-500 object-cover shrink-0" loading="lazy" decoding="async">
+    <div class="w-full h-32 flex flex-col sm:flex-row gap-4 justify-between">
+      <div class="flex flex-col items-center md:items-start gap-2">
+        <h1 id="project-title" class="text-3xl text-stone-900">{{ page.title }}</h1>
+        <p id="project-description" class="flex-grow text-base text-stone-700 leading-relaxed">{{ page.description }}</p>
+
+        <ul class="flex gap-2" aria-label="Project links">
+          {% for link in page.links %}
+          <li>
+            <a href="{{ link.url }}" class="flex gap-2 items-center text-xs text-stone-600 border border-stone-400 px-2 py-1 rounded-md bg-stone-100/50 hover:bg-stone-400 hover:text-stone-100 hover:border-stone-400">
+              {% if link.icon %}<i class="{{ link.icon }}"></i>{% endif %}
+              {% if link.label %}<span>{{ link.label }}</span>{% endif %}
+            </a>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <ul class="flex flex-row sm:flex-col justify-center md:justify-start sm:items-end gap-3 shrink-0" aria-label="Project badges">
+        {% for badge in page.badges limit: 3 %}
+        <li class="text-stone-700 text-sm hover:text-stone-900 transition-colors">
+          <img src="{{ badge }}" alt="" aria-hidden="true" loading="lazy" decoding="async">
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </header>
+
+  <section class="markdown-content" aria-label="Project content">
+    {{ content }}
+  </section>
+</article>
