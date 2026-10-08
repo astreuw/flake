@@ -1,0 +1,10 @@
+---
+---
+
+@layer properties;
+@layer theme, base, components, utilities;
+
+@layer components {
+  @import "base";
+  @import "highlight";
+}

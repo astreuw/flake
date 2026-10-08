@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<article class="flex flex-col" aria-labelledby="post-title" aria-describedby="post-description">
+  <header class="flex flex-col gap-2 pb-6 mb-2 border-b border-stone-400/50 dark:border-neutral-700/50">
+    <h1 id="post-title" class="text-3xl font-bold text-stone-900 dark:text-neutral-50">{{ page.title }}</h1>
+    <time datetime="{{ page.date | date_to_xmlschema }}" class="text-sm text-stone-600 dark:text-neutral-400">
+      {{ page.date | date: "%d/%m/%Y" }}
+    </time>
+    <p id="post-description" class="text-stone-600 dark:text-neutral-400">{{ page.description }}</p>
+  </header>
+
+  <section class="markdown-content" aria-label="Article content">
+    {{ content }}
+  </section>
+</article>

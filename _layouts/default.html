@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+{%- assign vars = site.data.vars -%}
+{%- assign navbar = site.data.navbar -%}
+<html lang="{{ vars.site.lang | default: 'pt-BR' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+
+  <!-- Resolve the theme before the first paint, otherwise the light theme flashes
+       for a moment on every navigation. Must stay inline and above the stylesheet. -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var dark = stored ? stored === 'dark'
+                          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Holds the page back until Tailwind's CDN stylesheet has landed, so the
+       load-in fade plays over the styled page instead of over unstyled HTML.
+       Bails out entirely when motion is unwelcome, and the reveal is armed on a
+       timer first, so a failure anywhere below can never leave the page blank. -->
+  <script>
+    (function () {
+      var root = document.documentElement;
+      if (!window.matchMedia || !window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+
+      root.classList.add('fx-pending');
+
+      var revealed = false;
+      function reveal() {
+        if (revealed) return;
+        revealed = true;
+        root.classList.remove('fx-pending');
+        root.classList.add('fx-ready');
+      }
+      setTimeout(reveal, 1500);
+
+      // Tailwind emits `@layer utilities`; our own sheet only declares it by
+      // name, so finding the block means the utilities are actually applied.
+      function utilitiesApplied() {
+        var sheets = document.styleSheets;
+        for (var i = 0; i < sheets.length; i++) {
+          var rules;
+          try { rules = sheets[i].cssRules; } catch (e) { continue; }
+          for (var j = 0; j < rules.length; j++) {
+            if (rules[j].name === 'utilities' && rules[j].cssRules) return true;
+          }
+        }
+        return false;
+      }
+
+      var staggered = false;
+      function stagger() {
+        var items = '.page-shell > header > div:first-child, .page-shell > header li, #theme-toggle,'
+                  + 'main :is(h1, h2, h3, h4, h5, h6, p, li, img, pre, table, blockquote, hr, nav, a.group),'
+                  + '.page-shell > footer';
+        var nodes = document.querySelectorAll(items);
+        var index = 0;
+        for (var i = 0; i < nodes.length; i++) {
+          var parent = nodes[i].parentElement;
+          if (parent && parent.closest('[data-fx]')) continue;
+          nodes[i].setAttribute('data-fx', '');
+          nodes[i].style.setProperty('--fx-i', Math.min(index++, 16));
+        }
+        staggered = true;
+      }
+      document.addEventListener('DOMContentLoaded', stagger);
+
+      (function poll() {
+        if (revealed) return;
+        if (staggered && utilitiesApplied()) { requestAnimationFrame(reveal); return; }
+        requestAnimationFrame(poll);
+      })();
+    })();
+  </script>
+
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" type="image/x-icon">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <!-- `dark:` defaults to prefers-color-scheme; point it at the .dark class so the
+       navbar toggle drives it instead. :where() keeps specificity at zero. -->
+  <style type="text/tailwindcss">
+    @custom-variant dark (&:where(.dark, .dark *));
+
+    @theme {
+      --font-serif: "Source Serif 4", ui-serif, Georgia, Cambria, "Times New Roman", serif;
+      --default-font-family: var(--font-serif);
+    }
+  </style>
+
+  <!-- SEO & Open Graph -->
+  <title>{{ vars.site.title }}{% if page.title %} - {{ page.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: vars.site.description }}">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:title" content="{{ page.title | default: vars.site.title }}">
+  <meta property="og:description" content="{{ page.description | default: vars.site.description }}">
+  <meta property="og:image" content="{{ page.banner | default: vars.site.banner | absolute_url }}">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:domain" content="{{ site.url | remove: 'https://' | remove: 'http://' }}">
+  <meta property="twitter:url" content="{{ page.url | absolute_url }}">
+  <meta name="twitter:title" content="{{ page.title | default: vars.site.title }}">
+  <meta name="twitter:description" content="{{ page.description | default: vars.site.description }}">
+  <meta name="twitter:image" content="{{ page.banner | default: vars.site.banner | absolute_url }}">
+</head>
+<body class="w-full min-h-screen flex flex-col items-center antialiased">
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-stone-100 dark:focus:bg-neutral-800 focus:px-4 focus:py-2 focus:text-stone-900 dark:focus:text-neutral-50 focus:outline focus:outline-2 focus:outline-stone-600 dark:focus:outline-neutral-400">Skip to content</a>
+
+  <div class="page-shell w-full max-w-[720px] mx-auto grow flex flex-col px-4 md:px-0 py-8 gap-6">
+    <header class="w-full flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+      <div class="text-xl md:text-2xl font-bold tracking-tight">
+        <a href="{{ '/' | relative_url }}" class="hover:text-stone-900 dark:hover:text-neutral-50 transition-colors">{{ vars.site.title }}</a>
+      </div>
+
+      <div class="flex items-center gap-2 md:gap-4">
+        <nav class="flex items-center" aria-label="Primary navigation">
+          <ul class="flex items-center gap-2 md:gap-4">
+            {%- assign current_url = page.url | relative_url -%}
+            {% for link in navbar.links %}
+              {% assign link_url = link.url | relative_url %}
+              {% if link.disabled != true %}
+              <li>
+                <a href="{{ link_url }}"
+                   class="flex items-center gap-2 hover:text-stone-900 dark:hover:text-neutral-50 transition-colors p-2 md:p-0 border border-stone-400 dark:border-neutral-700 rounded md:border-0"
+                   {% if current_url == link_url %}aria-current="page"{% endif %}
+                   title="{{ link.label }}">
+                  {% if navbar.show_icons %}
+                    {% include icon.html name=link.icon class="text-lg md:text-base" %}
+                  {% endif %}
+                  {% if navbar.show_labels %}
+                    <span class="{% if navbar.show_icons %}hidden md:inline{% else %}inline{% endif %}">{{ link.label }}</span>
+                  {% endif %}
+                </a>
+              </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </nav>
+
+        <button id="theme-toggle" type="button" aria-pressed="false"
+                class="flex items-center cursor-pointer hover:text-stone-900 dark:hover:text-neutral-50 transition-colors p-2 md:p-0 border border-stone-400 dark:border-neutral-700 rounded md:border-0">
+          {% include icon.html name="lucide:moon" class="text-lg md:text-base dark:hidden" %}
+          {% include icon.html name="lucide:sun" class="text-lg md:text-base hidden dark:inline-block" %}
+        </button>
+      </div>
+    </header>
+
+    <main id="main-content" class="w-full grow flex flex-col gap-4">
+      {{ content }}
+    </main>
+
+    <footer class="w-full mt-auto flex justify-between items-center border-t border-stone-400/50 dark:border-neutral-700/50 py-4 text-xs md:text-sm text-stone-600 dark:text-neutral-400">
+      <p>&copy; {{ "now" | date: "%Y" }} {{ vars.site.title }}.</p>
+      <p>Made with <a href="https://astreuw.github.io/project/flake" target="_blank" rel="noopener noreferrer" class="underline hover:text-stone-900 dark:hover:text-neutral-50">Flake</a></p>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      if (!btn) return;
+
+      function label() {
+        var isDark = root.classList.contains('dark');
+        var text = isDark ? 'Switch to light theme' : 'Switch to dark theme';
+        btn.setAttribute('aria-label', text);
+        btn.setAttribute('title', text);
+        btn.setAttribute('aria-pressed', String(isDark));
+      }
+
+      btn.addEventListener('click', function () {
+        var isDark = root.classList.toggle('dark');
+        try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch (e) {}
+        label();
+      });
+
+      // Keep following the OS until the visitor picks a theme explicitly.
+      var media = window.matchMedia('(prefers-color-scheme: dark)');
+      media.addEventListener('change', function (e) {
+        var stored = null;
+        try { stored = localStorage.getItem('theme'); } catch (err) {}
+        if (stored) return;
+        root.classList.toggle('dark', e.matches);
+        label();
+      });
+
+      label();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{%- assign icon_parts = include.name | split: ":" -%}
+{%- case icon_parts[0] -%}
+  {%- when "lucide" -%}
+    {%- capture icon_src -%}https://cdn.jsdelivr.net/npm/lucide-static@1.45.0/icons/{{ icon_parts[1] }}.svg{%- endcapture -%}
+  {%- when "si" -%}
+    {%- capture icon_src -%}https://cdn.jsdelivr.net/npm/simple-icons@16.30.0/icons/{{ icon_parts[1] }}.svg{%- endcapture -%}
+  {%- else -%}
+    {%- assign icon_src = include.name | relative_url -%}
+{%- endcase -%}
+<span class="icon {{ include.class }}" style="--icon: url('{{ icon_src }}')" aria-hidden="true"></span>

@@ -1,0 +1,61 @@
+---
+layout: default
+---
+
+{%- assign vars = site.data.vars -%}
+
+<section class="flex flex-col gap-2" aria-labelledby="posts-heading">
+  <h1 id="posts-heading" class="text-2xl font-bold tracking-wide text-stone-900 dark:text-neutral-50">All posts</h1>
+
+  {% if paginator.total_posts == 0 %}
+  <div class="flex gap-2">
+    <figure class="shrink-0">
+      <img src="{{ '/assets/img/eepy-cat.gif' | relative_url }}" alt="Illustration for no posts published yet" class="w-32 h-32 border border-stone-500 dark:border-neutral-700 rounded-lg" loading="lazy" decoding="async">
+    </figure>
+    <div>
+      <p>
+        {{ vars.posts.too_early_message }}<br>
+        &mdash; {{ vars.author.name }}
+      </p>
+    </div>
+  </div>
+  {% else %}
+  <ul class="flex flex-col gap-2">
+    {% for post in paginator.posts %}
+    <li>
+      <article>
+        <a href="{{ post.url | relative_url }}" class="flex flex-col gap-1 p-4 rounded-xl hover:bg-stone-300/40 dark:hover:bg-neutral-800/40 transition-all duration-300 hover:-translate-y-1">
+          <h2 class="text-xl font-bold text-stone-900 dark:text-neutral-50">{{ post.title }}</h2>
+          <time datetime="{{ post.date | date_to_xmlschema }}" class="text-sm text-stone-600 dark:text-neutral-400">{{ post.date | date: "%d/%m/%Y" }}</time>
+          <p class="text-stone-600 dark:text-neutral-400">{{ post.description }}</p>
+        </a>
+      </article>
+    </li>
+    {% endfor %}
+  </ul>
+
+  {% if paginator.total_pages > 1 %}
+  <nav class="flex items-center justify-between gap-4 mt-4 pt-4 border-t border-stone-400/50 dark:border-neutral-700/50" aria-label="Pagination">
+    {% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | relative_url }}" class="group inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-neutral-50 transition-colors" rel="prev">
+      {% include icon.html name="lucide:arrow-left" class="transition-transform duration-300 group-hover:-translate-x-2" %} Newer
+    </a>
+    {% else %}
+    <span aria-hidden="true"></span>
+    {% endif %}
+
+    <span class="text-sm text-stone-600 dark:text-neutral-400">Page {{ paginator.page }} of {{ paginator.total_pages }}</span>
+
+    {% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | relative_url }}" class="group inline-flex items-center gap-2 hover:text-stone-900 dark:hover:text-neutral-50 transition-colors" rel="next">
+      Older {% include icon.html name="lucide:arrow-right" class="transition-transform duration-300 group-hover:translate-x-2" %}
+    </a>
+    {% else %}
+    <span aria-hidden="true"></span>
+    {% endif %}
+  </nav>
+  {% endif %}
+  {% endif %}
+</section>
+
+{{ content }}
